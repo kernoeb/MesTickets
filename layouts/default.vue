@@ -6,7 +6,7 @@
       app
       clipped
       disable-resize-watcher
-      style="border-right: 2px solid black;"
+      style="border-right: 2px solid black;z-index:40;"
     >
       <v-list>
         <v-list-item
@@ -63,7 +63,7 @@
         <v-card-title>Configurer</v-card-title>
         <v-card-text>
           Ajoutez votre clé et votre token Atlassian
-          <p><a target="_blank" href="https://trello.com/app-key">Générer une clé</a></p>
+          <p><a href="https://trello.com/app-key" target="_blank">Générer une clé</a></p>
         </v-card-text>
         <v-form
           ref="form"
@@ -74,15 +74,15 @@
             v-model="key"
             :rules="[v => !!v || 'Élément requis']"
             label="Clé"
-            type="password"
             required
+            type="password"
           />
           <v-text-field
             v-model="token"
             :rules="[v => !!v || 'Élément requis']"
             label="Token"
-            type="password"
             required
+            type="password"
           />
           <v-btn
             :disabled="!valid"

@@ -100,7 +100,8 @@ export default {
           })
 
           this.lists = tmpObj
-        }).catch(() => {})
+        }).catch(() => {
+        })
       } catch (err) {
       }
     }

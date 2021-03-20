@@ -5,7 +5,7 @@
     flat
     style="border: 1px solid #b1b1b1"
   >
-    <v-icon color="#b1b1b1" style="left: 91%; z-index: 20; position: absolute;" left @click="openLink(task.url)">
+    <v-icon color="#b1b1b1" left style="left: 91%; z-index: 20; position: absolute;" @click="openLink(task.url)">
       mdi-link
     </v-icon>
     <v-img
@@ -23,22 +23,33 @@
         <v-chip
           v-for="customField in task.customFieldItems"
           :key="customField.id"
-          dark
-          class="mr-1 mb-1"
-          small
           :color="betterColor(getCustomField(customField).color)"
+          class="mr-1 mb-1"
+          dark
+          small
         >
-          <span :class="!getCustomField(customField).color && 'font-italic'">{{ getCustomField(customField).type }}</span>{{ getCustomField(customField).text }}
+          <span :class="!getCustomField(customField).color && 'font-italic'">{{
+            getCustomField(customField).type
+          }}</span>{{ getCustomField(customField).text }}
         </v-chip>
       </div>
       <div class="mt-2 mr-n1 d-flex justify-end" style="margin-bottom: -5px">
-        <v-avatar v-for="member in task.idMembers" :key="`${task.id}_members_${member}`" size="29" class="ml-1" :color="$store.state.members[member] && $store.state.members[member].member && $store.state.members[member].member.avatarHash ? null : 'red'">
+        <v-avatar
+          v-for="member in task.idMembers"
+          :key="`${task.id}_members_${member}`"
+          :color="$store.state.members[member] && $store.state.members[member].member && $store.state.members[member].member.avatarHash ? null : 'red'"
+          class="ml-1"
+          size="29"
+        >
           <img
             v-if="$store.state.members[member] && $store.state.members[member].member && $store.state.members[member].member.avatarHash"
             :alt="$store.state.members[member].fullName"
             :src="`https://trello-members.s3.amazonaws.com/${$store.state.members[member].idMember}/${$store.state.members[member].member.avatarHash}/50.png`"
           >
-          <span v-else-if="$store.state.members[member] && $store.state.members[member].member" class="white--text">{{ $store.state.members[member].member.initials }}</span>
+          <span
+            v-else-if="$store.state.members[member] && $store.state.members[member].member"
+            class="white--text"
+          >{{ $store.state.members[member].member.initials }}</span>
         </v-avatar>
       </div>
     </v-card-text>
@@ -90,7 +101,8 @@ export default {
     if (this.task.id && this.task.cover.idAttachment && this.$store.state.key && this.$store.state.token) {
       this.$axios.$get(`${urlPrefix}/cards/${this.task.id}/attachments/${this.task.cover.idAttachment}?key=${this.$store.state.key}&token=${this.$store.state.token}`).then((v) => {
         this.img = v
-      }).catch(() => {})
+      }).catch(() => {
+      })
     }
   },
   methods: {
@@ -98,7 +110,11 @@ export default {
       window.open(link)
     },
     betterColor (color) {
-      if (color === 'black') { return 'blue' } else if (color === 'yellow') { return '#F57F17' }
+      if (color === 'black') {
+        return 'blue'
+      } else if (color === 'yellow') {
+        return '#F57F17'
+      }
       return color
     },
     getCustomField (customField) {

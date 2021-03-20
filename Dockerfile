@@ -1,0 +1,18 @@
+FROM node:14.16.0
+
+# Create app directory
+WORKDIR /app
+ADD . /app/
+
+RUN yarn
+RUN yarn build
+
+# Add environment variables
+ENV HOST 0.0.0.0
+ENV NODE_ENV production
+ENV NPM_CONFIG_PRODUCTION false
+
+EXPOSE 3006
+
+# Start command
+CMD [ "yarn", "start" ]
